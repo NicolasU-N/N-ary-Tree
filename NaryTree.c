@@ -119,9 +119,17 @@ int search_forwarder(node *n, int id_dest) {
 			search_forwarder(n->child, id_dest);
 		}
 		//printf("Node ORIGINAL: %d\n", n->id);
+		
+		if(n->sibling == NULL && (n->child != NULL && n->child->id == forwarder && n->id != forwarder)){
+			//printf("Forwarder Condicion tests: %d\n", n->id);
+			forwarder= n->id;
+			//break;
+			//	search_forwarder(n, forwarder);
+			//	break;
+		}
 
 		//printf("Forwarder: %d\n", forwarder);
-		if (n->child != NULL && n->sibling != NULL && forwarder!=0 ) {
+		if (n->child != NULL && n->sibling != NULL && forwarder!=0 && n->id != forwarder) {
 			search_forwarder(n, forwarder);
 			break;
 		}
